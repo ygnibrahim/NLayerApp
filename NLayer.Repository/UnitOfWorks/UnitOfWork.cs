@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using NLayer.Core.UnitOfWorks;
+
+namespace NLayer.Repository.UnitOfWorks
+{
+    public  class UnitOfWork : IUnitOfWork
+    {
+        private readonly AppDbContext _appDbContext;
+
+    
+        public UnitOfWork(AppDbContext context)
+        {
+            _appDbContext = context;
+        }
+        public void Commit()
+        {
+            _appDbContext.SaveChanges();
+        }
+
+
+        public  async Task CommitAsync()
+        {
+            await _appDbContext.SaveChangesAsync();
+        }
+    }
+}
